@@ -9,7 +9,13 @@
 - Rechercher une recette
 - Filtrer les recettes par catégories
 - Mettre une recette en favori
-- Générer une liste à partir d'une recette
+- Générer une liste de course à partir d'une recette
+- Voir la liste de course
+- Supprimer la liste de course
+- Ajouter des ingrédients
+- Modifier des ingrédients
+- Supprimer des ingrédients
+- Voir des ingrédients
 - Authentification utilisateur
 - créer un compte
 - Supprimer un compte
@@ -30,7 +36,7 @@
 | ShoppingList  | Générer depuis recette, supprimer, voir            |
 | User          | Authentification, créer un compte, se connecter, se déconnecter, modifier profil, supprimer compte |
 | Sharing       | Partage recettes, voir les recettes partagées    |
-| Notification  | Nouvelle recette                           |
+| Notification  | Nouvelle recette, Notification de partage                           |
 | Favorite | Ajouter, Supprimer |
 
 
@@ -42,6 +48,7 @@
 - Sharing Module
 - Notification Module
 - Favorite Module
+- Ingredient Module
 
 ## Étape 2 — Identifier les entités métier
 
@@ -51,6 +58,7 @@
 - Sharing
 - Notification
 - Favorite
+- Ingredient
 
 ```
 class Recipe {
@@ -74,7 +82,7 @@ enum Category {
 class Ingredient {
       Long id;
       String name;
-      String<Unit> unit;
+      Unit unit;
       String quantity;
 }
 
