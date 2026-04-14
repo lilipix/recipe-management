@@ -25,7 +25,7 @@
 
 |Module        | Fonctionnalités incluses                     |
 |---------------|---------------------------------------------|
-| Recipe        | Créer, modifier, supprimer, filtrer, voir, rechercher, favoris, filtrer par catégories |
+| Recipe        | Créer, modifier, supprimer, filtrer, voir, rechercher, filtrer par catégories |
 | ShoppingList  | Générer depuis recette, supprimer, voir            |
 | User          | Authentification, créer un compte, se connecter, se déconnecter, modifier profil, supprimer compte |
 | Sharing       | Partage recettes, voir les recettes partagées    |
@@ -40,6 +40,7 @@
 - User Module
 - Sharing Module
 - Notification Module
+- Favorite Module
 
 ## Étape 2 — Identifier les entités métier
 
