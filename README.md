@@ -26,6 +26,7 @@
 |Module        | Fonctionnalités incluses                     |
 |---------------|---------------------------------------------|
 | Recipe        | Créer, modifier, supprimer, filtrer, voir, rechercher, filtrer par catégories |
+| Ingredients   | Ajouter, modifier, supprimer, voir |
 | ShoppingList  | Générer depuis recette, supprimer, voir            |
 | User          | Authentification, créer un compte, se connecter, se déconnecter, modifier profil, supprimer compte |
 | Sharing       | Partage recettes, voir les recettes partagées    |
@@ -56,9 +57,11 @@ class Recipe {
       Long id;
       String title;
       String description;
-      List<String> ingredients;
+      List<Ingredient> ingredient;
       Category category;
       User author;
+      Date createdAt;
+      Date updatedAt;
 }
 
 enum Category {
@@ -66,11 +69,23 @@ enum Category {
       ENTREES,
       DISHES,
       DESSERTS
-  }
+}
+
+class Ingredient {
+      Long id;
+      String name;
+      String<Unit> unit;
+      String quantity;
+}
+
+enum Unit {
+      G,
+      L
+}
 
 class ShoppingList {
       Long id;
-      List<String> items;
+      List<Ingredient> items;
       User owner;
       Recipe recipe;
 }
@@ -82,6 +97,7 @@ class User {
     String password;
     String firstName;
     String lastName;
+    Date createdAt;
 }
 
 class Sharing {
@@ -104,8 +120,14 @@ class Notification {
 
 class Favorite {
     Long id;
-    Recipe recipe;
     User user;
+    ResourceType type_resource;
+    Long resourceId;
+    Date created_at
+}
+
+enum ResourceType {
+    RECIPE
 }
 ```
       
