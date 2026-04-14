@@ -30,7 +30,7 @@
 | ShoppingList  | Générer depuis recette, supprimer, voir            |
 | User          | Authentification, créer un compte, se connecter, se déconnecter, modifier profil, supprimer compte |
 | Sharing       | Partage recettes, voir les recettes partagées    |
-| Notification  | Nouvelle recette, partage de recettes                           |
+| Notification  | Nouvelle recette                           |
 | Favorite | Ajouter, Supprimer |
 
 
