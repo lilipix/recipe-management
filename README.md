@@ -18,7 +18,7 @@
 
 ## Étape 1 — Regrouper par domaines métier
 
-|| Module        | Fonctionnalités incluses                     |
+|Module        | Fonctionnalités incluses                     |
 |---------------|---------------------------------------------|
 | Recipe        | Créer, modifier, supprimer, filtrer, voir   |
 | ShoppingList  | Créer, modifier, supprimer, voir            |
