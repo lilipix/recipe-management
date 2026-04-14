@@ -130,5 +130,8 @@ enum ResourceType {
     RECIPE
 }
 ```
-      
+
+### Diagramme de classe
+
+![Diagramme](./diagramme.png)
       
