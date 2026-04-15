@@ -171,7 +171,11 @@ Les fonctionnalités de notification de notre application nécessitent d'utilise
 ### Architecture Générale en 3 tiers
 Le schéma ci-dessous représente l'architure générale de notre application découpée en 3 couches.
 
+![Schéma architecture en 3-tiers](./archi-generale.png)
+
 ### Architecture Générale en micro-services
 Le schéma ci-dessous représente l'architecture générale de notre application découpée en micro-services.
+
+![Schéma architecture en micro-services](./archi-micro-services.png)
 
 
