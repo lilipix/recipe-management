@@ -143,7 +143,7 @@ enum ResourceType {
 
 ![Diagramme](./diagramme.png)
 
-### Étape 3 — Dériver les composants techniques
+## Étape 3 — Dériver les composants techniques
 
 Pour les fonctionnalités critiques de l’application on identifie les principales couches techniques nécessaires:
 
@@ -159,8 +159,19 @@ Pour les fonctionnalités critiques de l’application on identifie les principa
 | **Se connecter** | Recevoir les identifiants de connexion | Vérifier l’email et le mot de passe | Récupérer les informations utilisateur en base |
 | **Partager une recette** | Recevoir la demande de partage d’une recette | Vérifier la recette, l’expéditeur et le destinataire | Enregistrer le partage en base |
 
-### Étape 4 - Étape 4 — Les fonctionnalités orientent les patterns
+## Étape 4 - Étape 4 — Les fonctionnalités orientent les patterns
 
 Les fonctionnalités de notification de notre application nécessitent d'utiliser le Pattern Observer. Ce pattern est spécifique à l'envoi de notifications, en écoutant les évenements et en déclenchant la méthode de notification sur l'objet concerné.
+
+
+## Etape 5 - Schémas de base de données
+
+## Etape 6 - Architecture 
+
+### Architecture Générale en 3 tiers
+Le schéma ci-dessous représente l'architure générale de notre application découpée en 3 couches.
+
+### Architecture Générale en micro-services
+Le schéma ci-dessous représente l'architecture générale de notre application découpée en micro-services.
 
 
