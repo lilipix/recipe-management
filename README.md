@@ -142,4 +142,139 @@ enum ResourceType {
 ### Diagramme de classe
 
 ![Diagramme](./diagramme.png)
-      
+### Étape 3 — Dériver les composants techniques
+
+1. Créer une recette
+Fonctionnalité : créer une recette
+Interface d’entrée
+— recevoir la demande de création d’une recette
+Logique métier
+— vérifier le titre, la catégorie et les ingrédients
+Persistance
+— enregistrer la recette en base
+
+2. Modifier une recette
+Fonctionnalité : modifier une recette
+Interface d’entrée
+— recevoir la demande de modification d’une recette
+Logique métier
+— vérifier que la recette existe et valider les nouvelles données
+Persistance
+— mettre à jour la recette en base
+
+3. Supprimer une recette
+Fonctionnalité : supprimer une recette
+Interface d’entrée
+— recevoir la demande de suppression d’une recette
+Logique métier
+— vérifier que la recette existe et que la suppression est autorisée
+Persistance
+— supprimer la recette de la base
+
+4. Voir une recette
+Fonctionnalité : voir une recette
+Interface d’entrée
+— recevoir la demande d’affichage d’une recette
+Logique métier
+— vérifier que la recette demandée existe
+Persistance
+— récupérer la recette depuis la base
+
+5. Rechercher une recette
+Fonctionnalité : rechercher une recette
+Interface d’entrée
+— recevoir la demande de recherche de recette
+Logique métier
+— interpréter le mot-clé de recherche
+Persistance
+— récupérer les recettes correspondantes en base
+
+6. Filtrer les recettes par catégorie
+Fonctionnalité : filtrer les recettes par catégorie
+Interface d’entrée
+— recevoir la demande de filtrage par catégorie
+Logique métier
+— vérifier la catégorie sélectionnée
+Persistance
+— récupérer les recettes de cette catégorie en base
+
+7. Générer une liste de course
+Fonctionnalité : générer une liste de course
+Interface d’entrée
+— recevoir la demande de génération d’une liste
+Logique métier
+— récupérer les ingrédients de la recette et construire la liste
+Persistance
+— enregistrer la liste de course en base
+
+8. Voir la liste de course
+Fonctionnalité : voir la liste de course
+Interface d’entrée
+— recevoir la demande d’affichage de la liste
+Logique métier
+— vérifier que la liste existe et appartient à l’utilisateur
+Persistance
+— récupérer la liste depuis la base
+
+9. Créer un compte
+Fonctionnalité : créer un compte
+Interface d’entrée
+— recevoir les informations d’inscription
+Logique métier
+— vérifier la validité des données et l’unicité de l’email
+Persistance
+— enregistrer le nouvel utilisateur en base
+
+10. Se connecter
+Fonctionnalité : se connecter
+Interface d’entrée
+— recevoir les identifiants de connexion
+Logique métier
+— vérifier l’email et le mot de passe
+Persistance
+— récupérer les informations utilisateur en base
+
+11. Modifier son profil
+Fonctionnalité : modifier son profil
+Interface d’entrée
+— recevoir la demande de modification du profil
+Logique métier
+— vérifier la cohérence des nouvelles informations
+Persistance
+— mettre à jour le profil en base
+
+12. Partager une recette
+Fonctionnalité : partager une recette
+Interface d’entrée
+— recevoir la demande de partage d’une recette
+Logique métier
+— vérifier la recette, l’expéditeur et le destinataire
+Persistance
+— enregistrer le partage en base
+
+13. Voir les recettes partagées
+Fonctionnalité : voir les recettes partagées
+Interface d’entrée
+— recevoir la demande d’affichage des recettes partagées
+Logique métier
+— récupérer les partages liés à l’utilisateur
+Persistance
+— lire les partages depuis la base
+
+14. Ajouter une recette en favori
+Fonctionnalité : ajouter une recette en favori
+Interface d’entrée
+— recevoir la demande d’ajout en favori
+Logique métier
+— vérifier que la recette existe et n’est pas déjà en favori
+Persistance
+— enregistrer le favori en base
+
+15. Notification de partage
+Fonctionnalité : notification de partage
+Interface d’entrée
+— déclencher l’envoi d’une notification après un partage
+Logique métier
+— générer le message de notification
+Persistance
+— enregistrer la notification en base
