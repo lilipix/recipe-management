@@ -25,7 +25,7 @@
 - Partage de recettes entre utilisateurs
 - voir les recettes partagées
 - Notifications de nouvelles recettes
-- Notification de partage
+- Notifications de partage
 
 ## Étape 1 — Regrouper par domaines métier
 
@@ -142,6 +142,7 @@ enum ResourceType {
 ### Diagramme de classe
 
 ![Diagramme](./diagramme.png)
+
 ### Étape 3 — Dériver les composants techniques
 
 Pour les fonctionnalités critiques de l’application on identifie les principales couches techniques nécessaires:
@@ -157,3 +158,9 @@ Pour les fonctionnalités critiques de l’application on identifie les principa
 | **Créer un compte** | Recevoir les informations d’inscription | Vérifier la validité des données et l’unicité de l’email | Enregistrer le nouvel utilisateur en base |
 | **Se connecter** | Recevoir les identifiants de connexion | Vérifier l’email et le mot de passe | Récupérer les informations utilisateur en base |
 | **Partager une recette** | Recevoir la demande de partage d’une recette | Vérifier la recette, l’expéditeur et le destinataire | Enregistrer le partage en base |
+
+### Étape 4 - Étape 4 — Les fonctionnalités orientent les patterns
+
+Les fonctionnalités de notification de notre application nécessitent d'utiliser le Pattern Observer. Ce pattern est spécifique à l'envoi de notifications, en écoutant les évenements et en déclenchant la méthode de notification sur l'objet concerné.
+
+
