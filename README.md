@@ -179,15 +179,13 @@ Le schéma ci-dessous représente l'architecture générale de notre application
 ![Schéma architecture en micro-services](./archi-micro-service.png)
 
 ### ADR
-## ADR 001 : Choix de l'architecture 3-tiers pour la V1
+#### ADR 001 : Choix de l'architecture 3-tiers pour la V1
 
 Statut : Terminé
 
-Contexte
-Pour le lancement de l'application, nous devons fournir un produit minimum viable (MVP) rapidement. L'équipe est restreinte et nous avons besoin d'une structure simple à déployer et à tester.
+Contexte : Pour le lancement de l'application, nous devons fournir un produit minimum viable (MVP) rapidement. L'équipe est restreinte et nous avons besoin d'une structure simple à déployer et à tester.
 
-Décision
-Nous avons opté pour une architecture 3-tiers classique :
+Décision : Nous avons opté pour une architecture 3-tiers classique :
 
 Frontend : React (TypeScript).
 
@@ -206,17 +204,15 @@ Inconvénients : Difficile à passer à l'échelle (scalabilité verticale uniqu
 
 Statut : Proposé / En cours
 
-Contexte
-Avec la croissance de l'application, la maintenance du monolithe V1 devient complexe. Nous devons améliorer la disponibilité, permettre des déploiements indépendants par domaine métier et optimiser les performances.
+Contexte : Avec la croissance de l'application, la maintenance du monolithe V1 devient complexe. Nous devons améliorer la disponibilité, permettre des déploiements indépendants par domaine métier et optimiser les performances.
 
-Décision
-Migration vers une architecture micro-services structurée par domaines :
+Décision : Migration vers une architecture micro-services structurée par domaines :
 
 API Gateway : Point d'entrée unique pour le Frontend.
 
 Découpage métier : Création de services indépendants (Auth, Sharing, Favorites, Notifications).
 
-Service "Core" (Recipes/Ingredients/ShoppingList) : Ces trois entités sont regroupées dans un seul service pour garantir l'intégrité transactionnelle (une modification de recette impacte directement la liste de courses).
+Service "Core" (Recipes/Ingredients/ShoppingList) : Ces trois entités sont regroupées dans un seul service pour garantir l'intégrité transactionnelle "une modification de recette impacte directement la liste de course".
 
 Haute disponibilité : Utilisation de réplicas PostgreSQL pour chaque service.
 
@@ -231,8 +227,7 @@ Inconvénients : Complexité opérationnelle , gestion de la cohérence éventue
 
 Statut : Accepté
 
-Contexte
-Pour notre application de gestion de recettes et de listes de courses, nous avons besoin d'un stockage persistant. Le choix se porte sur la structure des données et sur les garanties de fiabilité des transactions.
+Contexte: Pour notre application de gestion de recettes et de listes de courses, nous avons besoin d'un stockage persistant. Le choix se porte sur la structure des données et sur les garanties de fiabilité des transactions.
 
 Alternatives envisagées
 NoSQL (ex: MongoDB, Cassandra) : Offrent une grande flexibilité de schéma et une scalabilité horizontale facilitée.
@@ -255,8 +250,7 @@ Choix de PostgreSQL : Se situe dans la catégorie CP (ou CA sur un seul nœud). 
 
 Alternative NoSQL : Beaucoup sont de type AP (Disponibilité et Tolérance). Pour une application sociale de recettes, voir une recette avec 2 secondes de retard est acceptable, mais avoir une liste de courses désynchronisée ou une faille de permission est critique.
 
-Décision
-Nous retenons PostgreSQL pour sa maturité, sa gestion native du JSON (permettant une certaine flexibilité NoSQL si besoin) et sa conformité stricte aux propriétés ACID.
+Décision : Nous retenons PostgreSQL pour sa maturité, sa gestion native du JSON (permettant une certaine flexibilité NoSQL si besoin) et sa conformité stricte aux propriétés ACID.
 
 Conséquences
 Positives : Intégrité des données garantie, jointures complexes performantes (ex: filtrer les favoris par catégorie), écosystème d'outils d'audit robuste.
