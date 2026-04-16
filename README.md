@@ -159,7 +159,7 @@ Pour les fonctionnalités critiques de l’application on identifie les principa
 | **Se connecter** | Recevoir les identifiants de connexion | Vérifier l’email et le mot de passe | Récupérer les informations utilisateur en base |
 | **Partager une recette** | Recevoir la demande de partage d’une recette | Vérifier la recette, l’expéditeur et le destinataire | Enregistrer le partage en base |
 
-## Étape 4 - Étape 4 — Les fonctionnalités orientent les patterns
+## Étape 4 - Les fonctionnalités orientent les patterns
 
 Les fonctionnalités de notification de notre application nécessitent d'utiliser le Pattern Observer. Ce pattern est spécifique à l'envoi de notifications, en écoutant les évenements et en déclenchant la méthode de notification sur l'objet concerné.
 
@@ -178,84 +178,87 @@ Le schéma ci-dessous représente l'architecture générale de notre application
 
 ![Schéma architecture en micro-services](./archi-micro-service.png)
 
-### ADR
+##  ADR
 #### ADR 001 : Choix de l'architecture 3-tiers pour la V1
 
-Statut : Terminé
+**Statut :** Terminé
 
-Contexte : Pour le lancement de l'application, nous devons fournir un produit minimum viable (MVP) rapidement. L'équipe est restreinte et nous avons besoin d'une structure simple à déployer et à tester.
+**Contexte :** Pour le lancement de l'application, nous devons fournir un produit minimum viable (MVP) rapidement. L'équipe est restreinte et nous avons besoin d'une structure simple à déployer et à tester.
 
-Décision : Nous avons opté pour une architecture 3-tiers classique :
+**Décision :** Nous avons opté pour une architecture 3-tiers classique :
 
-Frontend : React (TypeScript).
+**Frontend :** React (TypeScript).
 
-Backend : Node.js avec Express (TypeScript).
+**Backend :** Node.js avec Express (TypeScript).
 
-Base de données : PostgreSQL unique.
+**Base de données :** PostgreSQL unique.
 
-Routage : Un Reverse Proxy gère l'aiguillage entre le web et l'API.
+**Routage :** Un Reverse Proxy gère l'aiguillage entre le web et l'API.
 
-Conséquences
-Avantages : Développement rapide, déploiement simplifié, cohérence des données facilitée par une base unique, coûts d'infrastructure réduits.
+**Conséquences**
 
-Inconvénients : Difficile à passer à l'échelle (scalabilité verticale uniquement), risque de "code spaghetti" si le backend grossit trop, point de défaillance unique (la BDD).
+- **Avantages :** Développement rapide, déploiement simplifié, cohérence des données facilitée par une base unique, coûts d'infrastructure réduits.
+
+- **Inconvénients :** Difficile à passer à l'échelle (scalabilité verticale uniquement), risque de "code spaghetti" si le backend grossit trop, point de défaillance unique (la BDD).
 
 #### ADR 002 : Transition vers une architecture micro-services pour la V2
 
-Statut : Proposé / En cours
+**Statut :** Proposé / En cours
 
-Contexte : Avec la croissance de l'application, la maintenance du monolithe V1 devient complexe. Nous devons améliorer la disponibilité, permettre des déploiements indépendants par domaine métier et optimiser les performances.
+**Contexte :** Avec la croissance de l'application, la maintenance du monolithe V1 devient complexe. Nous devons améliorer la disponibilité, permettre des déploiements indépendants par domaine métier et optimiser les performances.
 
-Décision : Migration vers une architecture micro-services structurée par domaines :
+**Décision :** Migration vers une architecture micro-services structurée par domaines :
 
-API Gateway : Point d'entrée unique pour le Frontend.
+**API Gateway :** Point d'entrée unique pour le Frontend.
 
-Découpage métier : Création de services indépendants (Auth, Sharing, Favorites, Notifications).
+**Découpage métier :** Création de services indépendants (Auth, Sharing, Favorites, Notifications).
 
-Service "Core" (Recipes/Ingredients/ShoppingList) : Ces trois entités sont regroupées dans un seul service pour garantir l'intégrité transactionnelle "une modification de recette impacte directement la liste de course".
+**Service "Core" (Recipes/Ingredients/ShoppingList) :** Ces trois entités sont regroupées dans un seul service pour garantir l'intégrité transactionnelle "une modification de recette impacte directement la liste de course".
 
-Haute disponibilité : Utilisation de réplicas PostgreSQL pour chaque service.
+**Haute disponibilité :** Utilisation de réplicas PostgreSQL pour chaque service.
 
-Performance : Implémentation de Redis pour le cache du service principal.
+**Performance :** Implémentation de Redis pour le cache du service principal.
 
-Conséquences
-Avantages : Scalabilité granulaire "on booste uniquement le service de recettes", meilleure isolation des pannes, maintenabilité accrue par domaine.
+**Conséquences**
 
-Inconvénients : Complexité opérationnelle , gestion de la cohérence éventuelle entre services, coût d'infrastructure plus élevé.
+- **Avantages :** Scalabilité granulaire "on booste uniquement le service de recettes", meilleure isolation des pannes, maintenabilité accrue par domaine.
+
+- **Inconvénients :** Complexité opérationnelle , gestion de la cohérence éventuelle entre services, coût d'infrastructure plus élevé.
 
 #### ADR 003 : Choix de PostgreSQL comme système de gestion de base de données
 
-Statut : Accepté
+**Statut :** Accepté
 
-Contexte: Pour notre application de gestion de recettes et de listes de courses, nous avons besoin d'un stockage persistant. Le choix se porte sur la structure des données et sur les garanties de fiabilité des transactions.
+**Contexte:** Pour notre application de gestion de recettes et de listes de courses, nous avons besoin d'un stockage persistant. Le choix se porte sur la structure des données et sur les garanties de fiabilité des transactions.
 
-Alternatives envisagées
-NoSQL (ex: MongoDB, Cassandra) : Offrent une grande flexibilité de schéma et une scalabilité horizontale facilitée.
+**Alternatives envisagées**
+**NoSQL (ex: MongoDB, Cassandra) :** Offrent une grande flexibilité de schéma et une scalabilité horizontale facilitée.
 
-SGBD Relationnel (PostgreSQL) : Offre une structure rigoureuse et des garanties transactionnelles fortes.
+**SGBD Relationnel (PostgreSQL) :** Offre une structure rigoureuse et des garanties transactionnelles fortes.
 
-Justification du choix : ACID vs BASE
+**Justification du choix : ACID vs BASE**
 L'application manipule des données critiques (comptes utilisateurs, partages de recettes, permissions). Nous privilégions le modèle ACID (Atomicité, Cohérence, Isolation, Durabilité) de PostgreSQL :
 
-Atomicité : Si la création d'une recette échoue à mi-chemin, rien n'est enregistré.
+**Atomicité :** Si la création d'une recette échoue à mi-chemin, rien n'est enregistré.
 
-Cohérence : Les règles métier (ex: une ShoppingList doit être liée à un User existant) sont garanties par des clés étrangères.
+**Cohérence :** Les règles métier (ex: une ShoppingList doit être liée à un User existant) sont garanties par des clés étrangères.
 
 Les bases NoSQL suivent souvent le modèle BASE (Basically Available, Soft state, Eventual consistency), où la cohérence n'est pas immédiate, ce qui poserait problème pour la gestion des permissions de partage.
 
-Analyse via le Théorème CAP
+**Analyse via le Théorème CAP**
 Le théorème CAP stipule qu'un système distribué ne peut garantir que deux des trois propriétés suivantes : Cohérence, Availability (Disponibilité), Partition Tolerance (Tolérance au fractionnement).
 
-Choix de PostgreSQL : Se situe dans la catégorie CP (ou CA sur un seul nœud). En cas de conflit, nous privilégions la Cohérence  plutôt que la disponibilité absolue (réponse potentiellement erronée).
+**Choix de PostgreSQL :** Se situe dans la catégorie CP (ou CA sur un seul nœud). En cas de conflit, nous privilégions la Cohérence  plutôt que la disponibilité absolue (réponse potentiellement erronée).
 
-Alternative NoSQL : Beaucoup sont de type AP (Disponibilité et Tolérance). Pour une application sociale de recettes, voir une recette avec 2 secondes de retard est acceptable, mais avoir une liste de courses désynchronisée ou une faille de permission est critique.
+**Alternative NoSQL :** Beaucoup sont de type AP (Disponibilité et Tolérance). Pour une application sociale de recettes, voir une recette avec 2 secondes de retard est acceptable, mais avoir une liste de courses désynchronisée ou une faille de permission est critique.
 
-Décision : Nous retenons PostgreSQL pour sa maturité, sa gestion native du JSON (permettant une certaine flexibilité NoSQL si besoin) et sa conformité stricte aux propriétés ACID.
+**Décision :** Nous retenons PostgreSQL pour sa maturité, sa gestion native du JSON (permettant une certaine flexibilité NoSQL si besoin) et sa conformité stricte aux propriétés ACID.
 
-Conséquences
-Positives : Intégrité des données garantie, jointures complexes performantes (ex: filtrer les favoris par catégorie), écosystème d'outils d'audit robuste.
+**Conséquences :** 
 
-Négatives : Schéma plus rigide nécessitant des migrations de base de données (scripts SQL) à chaque évolution, montée en charge horizontale plus complexe qu'avec du NoSQL (nécessite les réplicas vus en V2).
+- **Positives :** Intégrité des données garantie, jointures complexes performantes (ex: filtrer les favoris par catégorie), écosystème d'outils d'audit robuste.
+
+- **Négatives :** Schéma plus rigide nécessitant des migrations de base de données (scripts SQL) à chaque évolution, montée en charge horizontale plus complexe qu'avec du NoSQL (nécessite les réplicas vus en V2).
 
 
 
