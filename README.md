@@ -168,13 +168,13 @@ Les fonctionnalités de notification de notre application nécessitent d'utilise
 
 ## Etape 6 - Architecture 
 
-### Architecture Générale en 3 tiers
-Le schéma ci-dessous représente l'architure générale de notre application découpée en 3 couches.
+### Architecture Générale en 3 tiers 
+Le schéma ci-dessous représente l'architure générale de notre application découpée en 3 couches. Cette architecture est retenue pour la V1 de notre application afin d'avoir une version rapidement fonctionnelle, réalisée par une petite équipe de développeurs. Un reverse proxy se charge d'orienter les requêtes vers le frontend React ou le backend Express/NodeJS. La persistance des données est assurée par une base de données relationnelle POstgreSQL.
 
 ![Schéma architecture en 3-tiers](./archi-generale.png)
 
 ### Architecture Générale en micro-services
-Le schéma ci-dessous représente l'architecture générale de notre application découpée en micro-services.
+Le schéma ci-dessous représente l'architecture générale de notre application découpée en micro-services. Nous projetons d'intégrer cette architecture lors de la V2 de notre application afin de garantir une plus grande maintenabilité. L'architecture est découpée par domaine métier. Le frontend React communique avec les services par le biais d'une API Gateway qui permet de rediriger les requêtes vers les différents services. Chaque service utilise une base de données PostgreSQL avec un ou plusieurs réplicas afin de garantir la disponibilité des données. Un cache est mis en place avec Redis afin d'améliorer les performances du service principal. Dans ce service principal nous avons fait le choix de regrouper recipes, ingredients et shopping list car la liste de course dépend directement des ingrédients de la recette et doit être mise à jour dès qu'une recette est modifiée. 
 
 ![Schéma architecture en micro-services](./archi-micro-service.png)
 
