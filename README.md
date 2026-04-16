@@ -200,7 +200,7 @@ Avantages : Développement rapide, déploiement simplifié, cohérence des donn�
 
 Inconvénients : Difficile à passer à l'échelle (scalabilité verticale uniquement), risque de "code spaghetti" si le backend grossit trop, point de défaillance unique (la BDD).
 
-## ADR 002 : Transition vers une architecture micro-services pour la V2
+#### ADR 002 : Transition vers une architecture micro-services pour la V2
 
 Statut : Proposé / En cours
 
@@ -223,7 +223,7 @@ Avantages : Scalabilité granulaire "on booste uniquement le service de recettes
 
 Inconvénients : Complexité opérationnelle , gestion de la cohérence éventuelle entre services, coût d'infrastructure plus élevé.
 
-## ADR 003 : Choix de PostgreSQL comme système de gestion de base de données
+#### ADR 003 : Choix de PostgreSQL comme système de gestion de base de données
 
 Statut : Accepté
 
