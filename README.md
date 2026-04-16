@@ -176,6 +176,6 @@ Le schéma ci-dessous représente l'architure générale de notre application d�
 ### Architecture Générale en micro-services
 Le schéma ci-dessous représente l'architecture générale de notre application découpée en micro-services.
 
-![Schéma architecture en micro-services](./archi-micro-services.png)
+![Schéma architecture en micro-services](./archi-micro-service.png)
 
 
