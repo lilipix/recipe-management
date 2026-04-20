@@ -165,7 +165,7 @@ Les fonctionnalités de notification de notre application nécessitent d'utilise
 
 
 ## Etape 5 - Schémas de base de données
-
+![Diagramme](./image.png)
 ## Etape 6 - Architecture 
 
 ### Architecture Générale en 3 tiers 
